@@ -1,0 +1,18 @@
+reset
+
+set terminal postscript eps enhanced color font 14;
+set output "testgraph.eps"
+
+set size 1,1
+set multiplot
+set datafile separator ','
+# first
+set size 0.5,0.5
+set origin 0,0.5
+plot "graph.csv" using 1:2 with linespoints
+
+# second
+set origin 0.5,0.5
+plot [][:] "graph.csv" using 4:5 with linespoints
+
+unset multiplot

@@ -1,0 +1,42 @@
+#comment out the "2" if 'graph.eps is not responding' and comment in '#1'
+
+# 1
+#set term wxt enhanced
+#set terminal png size 2080,880
+#set output "graph1.png"
+# 1
+
+#2
+set terminal postscript eps enhanced color font 14;
+set output "graph1.eps"
+#2
+
+set size 1.5,1.5
+set multiplot
+set datafile separator ','
+
+# first graph
+set grid
+set size 1.5,0.55
+set origin 0,0.8
+set title 'Errors of Pi'
+set ylabel 'Absolute and Relative Absolute Error'
+set xlabel 'STEPS '
+
+plot "graph.csv" using 1:4 w l lc rgb 'blue' title 'Absolute Error' ,\
+ "graph.csv" using 1:5 w l lc rgb 'red' title 'Relative Absolute Error'
+
+
+# second graph
+set grid
+set origin 0.0,0.2
+set title 'Zoom in(STEPS <= 3000)'
+set ylabel 'Absolute and Relative Absolute Error'
+set xlabel 'STEPS'
+set xtics 0,200
+
+plot [:3000][:] "graph.csv" using 1:4 w l lc rgb 'blue' title 'Absolute Error' ,\
+ "graph.csv" using 1:5 w l lc rgb 'red' title 'Relative Absolute Error'
+
+
+unset multiplot
